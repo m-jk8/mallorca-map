@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Lunas kulinarische Karte</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     html, body { margin: 0; padding: 0; }
@@ -11,48 +11,49 @@
   </style>
 </head>
 <body>
-  <div id="map"></div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map', {
-      crs: L.CRS.Simple,
-      minZoom: -1,
-      maxZoom: 2
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -1,
+    maxZoom: 2
+  });
+
+  // Bildgröße deiner Karte
+  const bounds = [[0, 1536], [1024, 0]];
+  L.imageOverlay('map.png', bounds).addTo(map);
+  map.fitBounds(bounds);
+
+  // Marker-Icons mit Luna-Bildern
+  function createIcon(img) {
+    return L.icon({
+      iconUrl: img,
+      iconSize: [60, 60],
+      iconAnchor: [30, 60],
+      popupAnchor: [0, -60]
     });
+  }
 
-    // Bildgröße der Karte (1536 x 1024 px)
-    const bounds = [[0, 1536], [1024, 0]];
-    L.imageOverlay('map.png', bounds).addTo(map);
-    map.fitBounds(bounds);
+  // MARKER mit korrekten Koordinaten:
+  L.marker([420, 370], { icon: createIcon('luna-car.png') })
+    .addTo(map)
+    .bindPopup("<b>Sumallia Restaurant</b><br><a href='https://maps.app.goo.gl/YRPxnLyd37Harvrx9' target='_blank'>Google Maps öffnen</a>");
 
-    // Hilfsfunktion für Icon
-    function createIcon(filename) {
-      return L.icon({
-        iconUrl: filename,
-        iconSize: [60, 60],
-        iconAnchor: [30, 30],
-        popupAnchor: [0, -30]
-      });
-    }
+  L.marker([1340, 160], { icon: createIcon('luna-sitzend.png') })
+    .addTo(map)
+    .bindPopup("<b>HOTEL CORAZÓN</b><br><a href='https://maps.app.goo.gl/Y4pAaKAMWvzkj5v7' target='_blank'>Google Maps öffnen</a>");
 
-    // Marker setzen
-    L.marker([420, 370], { icon: createIcon('luna-car.png') })
-  .addTo(map)
-  .bindPopup("<b>Sumallia Restaurant</b><br><a href='https://maps.app.goo.gl/YRPxnLyd37Harvrx9' target='_blank'>Google Maps öffnen</a>");
+  L.marker([600, 320], { icon: createIcon('luna-wandern.png') })
+    .addTo(map)
+    .bindPopup("<b>Restaurant Nama</b><br><a href='https://maps.app.goo.gl/gNPdufrCXVewvJRY7' target='_blank'>Google Maps öffnen</a>");
 
-L.marker([1340, 160], { icon: createIcon('luna-sitzend.png') })
-  .addTo(map)
-  .bindPopup("<b>HOTEL CORAZÓN</b><br><a href='https://maps.app.goo.gl/Y4pAaKAMWvzkj5v7' target='_blank'>Google Maps öffnen</a>");
+  L.marker([180, 260], { icon: createIcon('luna-liegend.png') })
+    .addTo(map)
+    .bindPopup("<b>Simply Son Braho</b><br><a href='https://maps.app.goo.gl/URizmvtp9kpJ3oJm8' target='_blank'>Google Maps öffnen</a>");
+</script>
 
-L.marker([600, 320], { icon: createIcon('luna-wandern.png') })
-  .addTo(map)
-  .bindPopup("<b>Restaurant Nama</b><br><a href='https://maps.app.goo.gl/gNPdufrCXVewvJRY7' target='_blank'>Google Maps öffnen</a>");
-
-L.marker([180, 260], { icon: createIcon('luna-liegend.png') })
-  .addTo(map)
-  .bindPopup("<b>Simply Son Braho</b><br><a href='https://maps.app.goo.gl/URizmvtp9kpJ3oJm8' target='_blank'>Google Maps öffnen</a>");
-
-  </script>
 </body>
 </html>
