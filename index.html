@@ -16,19 +16,19 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  // 1. Karte initialisieren
+  // Karte initialisieren
   const map = L.map('map', {
     crs: L.CRS.Simple,
     minZoom: -1,
     maxZoom: 2
   });
 
-  // 2. Hintergrundkarte mit Bild (Größe: 1536x1024)
+  // Hintergrundbild
   const bounds = [[0, 1536], [1024, 0]];
   L.imageOverlay('map.png', bounds).addTo(map);
   map.fitBounds(bounds);
 
-  // 3. Luna-Icons vorbereiten
+  // Custom Marker-Icons
   function createIcon(img) {
     return L.icon({
       iconUrl: img,
@@ -38,18 +38,22 @@
     });
   }
 
-  // 4. Marker an korrekten Koordinaten setzen
+  // Marker mit finalen Positionen und Restaurantinfos
   L.marker([485, 438], { icon: createIcon('luna-car.png') })
-    .addTo(map).bindPopup("Luna im Auto");
+    .addTo(map)
+    .bindPopup("<b>Sumallia Restaurant</b><br><a href='https://maps.app.goo.gl/YRPxnLyd37Harvrx9' target='_blank'>Google Maps öffnen</a>");
 
   L.marker([772, 638], { icon: createIcon('luna-sitzend.png') })
-    .addTo(map).bindPopup("Luna sitzend");
+    .addTo(map)
+    .bindPopup("<b>HOTEL CORAZÓN</b><br><a href='https://maps.app.goo.gl/Y4pAaKAMWvk2j5v7' target='_blank'>Google Maps öffnen</a>");
 
   L.marker([686, 686], { icon: createIcon('luna-wandern.png') })
-    .addTo(map).bindPopup("Luna wandernd");
+    .addTo(map)
+    .bindPopup("<b>Restaurant Nama</b><br><a href='https://maps.app.goo.gl/gNPdufrCXVewvJRY7' target='_blank'>Google Maps öffnen</a>");
 
   L.marker([516, 546], { icon: createIcon('luna-liegend.png') })
-    .addTo(map).bindPopup("Luna liegend");
+    .addTo(map)
+    .bindPopup("<b>Simply Son Braho</b><br><a href='https://maps.app.goo.gl/URizmtvp9kpJ3oJm8' target='_blank'>Google Maps öffnen</a>");
 </script>
 
 </body>
