@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; width: 100%; }
-    #map { height: 100%; width: 100%; }
+    html, body { margin: 0; padding: 0; }
+    #map { height: 100vh; width: 100vw; }
   </style>
 </head>
 <body>
@@ -16,43 +16,46 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
+  // 1. Karte initialisieren
   const map = L.map('map', {
     crs: L.CRS.Simple,
     minZoom: -1,
     maxZoom: 2
   });
 
-  const bounds = [[0, 1536], [1024, 0]];
+  // 2. Bild als Karte verwenden (Größe: 1536 x 1024)
+  const bounds = [[0, 1536], [1024, 0]]; // [y,x]
   L.imageOverlay('map.png', bounds).addTo(map);
   map.fitBounds(bounds);
 
-  // Eigene Marker mit Luna-Bildern
+  // 3. Icons mit Bildern
   function createIcon(img) {
     return L.icon({
       iconUrl: img,
-      iconSize: [70, 70],
-      iconAnchor: [35, 70],
-      popupAnchor: [0, -70]
+      iconSize: [60, 60],
+      iconAnchor: [30, 60],
+      popupAnchor: [0, -60]
     });
   }
 
-  // Marker setzen mit angepassten Positionen
-  L.marker([160, 550], { icon: createIcon('luna-sitzend.png') })
-    .addTo(map)
-    .bindPopup("<b>Luna sitzend</b>");
+  // 4. Marker setzen
+  L.marker([340, 540], { icon: createIcon('luna-car.png') })
+    .addTo(map).bindPopup("Luna im Auto");
 
-  L.marker([280, 620], { icon: createIcon('luna-wandernd.png') })
-    .addTo(map)
-    .bindPopup("<b>Luna wandernd</b>");
+  L.marker([360, 600], { icon: createIcon('luna-liegend.png') })
+    .addTo(map).bindPopup("Luna liegend");
 
-  L.marker([590, 600], { icon: createIcon('luna-liegend.png') })
-    .addTo(map)
-    .bindPopup("<b>Luna liegend</b>");
+  L.marker([700, 520], { icon: createIcon('luna-sitzend.png') })
+    .addTo(map).bindPopup("Luna sitzend");
 
-  L.marker([670, 520], { icon: createIcon('luna-car.png') })
-    .addTo(map)
-    .bindPopup("<b>Luna im Auto</b>");
+  L.marker([520, 760], { icon: createIcon('luna-wandern.png') })
+    .addTo(map).bindPopup("Luna wandernd");
 
+  // 5. Klickhilfe für neue Markerpositionen
+  map.on('click', function(e) {
+    alert("Klick bei: Y = " + e.latlng.lat.toFixed(0) + ", X = " + e.latlng.lng.toFixed(0));
+  });
 </script>
+
 </body>
 </html>
