@@ -23,12 +23,12 @@
     maxZoom: 2
   });
 
-  // 2. Bild als Karte verwenden (Größe: 1536 x 1024)
-  const bounds = [[0, 1536], [1024, 0]]; // [y,x]
+  // 2. Hintergrundkarte mit Bild (Größe: 1536x1024)
+  const bounds = [[0, 1536], [1024, 0]];
   L.imageOverlay('map.png', bounds).addTo(map);
   map.fitBounds(bounds);
 
-  // 3. Icons mit Bildern
+  // 3. Luna-Icons vorbereiten
   function createIcon(img) {
     return L.icon({
       iconUrl: img,
@@ -38,23 +38,18 @@
     });
   }
 
-  // 4. Marker setzen
-  L.marker([340, 540], { icon: createIcon('luna-car.png') })
+  // 4. Marker an korrekten Koordinaten setzen
+  L.marker([485, 438], { icon: createIcon('luna-car.png') })
     .addTo(map).bindPopup("Luna im Auto");
 
-  L.marker([360, 600], { icon: createIcon('luna-liegend.png') })
-    .addTo(map).bindPopup("Luna liegend");
-
-  L.marker([700, 520], { icon: createIcon('luna-sitzend.png') })
+  L.marker([772, 638], { icon: createIcon('luna-sitzend.png') })
     .addTo(map).bindPopup("Luna sitzend");
 
-  L.marker([520, 760], { icon: createIcon('luna-wandern.png') })
+  L.marker([686, 686], { icon: createIcon('luna-wandern.png') })
     .addTo(map).bindPopup("Luna wandernd");
 
-  // 5. Klickhilfe für neue Markerpositionen
-  map.on('click', function(e) {
-    alert("Klick bei: Y = " + e.latlng.lat.toFixed(0) + ", X = " + e.latlng.lng.toFixed(0));
-  });
+  L.marker([516, 546], { icon: createIcon('luna-liegend.png') })
+    .addTo(map).bindPopup("Luna liegend");
 </script>
 
 </body>
