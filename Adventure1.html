@@ -1,103 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission Pasta Mystery - Adventure 1</title>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive;
-            background-color: #FFF8E7;
-            color: #333;
-            padding: 20px;
-            max-width: 650px;
-            margin: auto;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #FFCC00;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 5px;
-        }
-        button:hover {
-            background-color: #F99E1A;
-        }
-        .story {
-            margin-top: 20px;
-            font-size: 1.1em;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adventure 1 – Mission Pasta Mystery</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background-color: #fff8e7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #444;
+    }
+
+    .story {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #ffcc00;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #f99e1a;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .back a {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back a:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
 
-<h2>🍝🥸 Mission Pasta Mystery: Agent Luna in Action! 🕵️‍♀️🍕</h2>
+  <div class="container">
+    <h2>🍝 Mission Pasta Mystery: Agent Luna in Action! 🕵️‍♀️</h2>
+    <div class="story" id="story"></div>
 
-<div class="story" id="story"></div>
+    <div class="back">
+      <a href="index.html">🔙 Zurück zur Karte</a>
+    </div>
+  </div>
 
-<script>
+  <script>
+    function scene1() {
+      document.getElementById('story').innerHTML = `
+        <p>Hi! Ich bin Luna – Geheimagentin und größte Pasta-Liebhaberin auf ganz Mallorca! Ich liebe Abenteuer fast genauso sehr wie Spaghetti mit extra viel Käse.</p>
+        <p>Heute kam ein Anruf auf meinem Spaghetti-Telefon von Agent Parmesan:</p>
+        <blockquote>"Agentin Luna, Notfall! Das geheime Pasta-Rezept aus dem Restaurant <b>'Pasta Paradise'</b> wurde gestohlen! Ravi O’Li, der fiese Nudel-Spion, will es für sich – du bist unsere letzte Hoffnung!"</blockquote>
+        <p>Ich bin sofort losgerannt. Der erste Hinweis sagt:</p>
+        <blockquote>"Such unter dem roten Tischtuch im 'Pasta Paradise' – dort geht’s weiter!"</blockquote>
+        <h3>Was soll ich tun?</h3>
+        <button onclick="scene2A()">👩‍🍳 Die freundliche Kellnerin ansprechen</button>
+        <button onclick="scene2B()">🔎 Heimlich unter das Tischtuch schauen</button>
+      `;
+    }
 
-function scene1() {
-    document.getElementById('story').innerHTML = `
-        <p>Hi! I'm Luna – secret agent and the biggest pasta lover in all Mallorca! I love adventures almost as much as spaghetti with lots of cheese.</p>
+    function scene2A() {
+      document.getElementById('story').innerHTML = `
+        <p>Die Kellnerin lächelt und flüstert: "Ich habe einen verdächtigen Mann gesehen – er hatte einen Nudelschnurrbart und wollte in die Küche. Sei vorsichtig, Luna!"</p>
+        <button onclick="scene3A()">🥷 Heimlich in die Küche schleichen</button>
+      `;
+    }
 
-        <p>Today, I received an important call on my special Spaghetti-Phone. It was my chief agent, Agent Parmesan:</p>
+    function scene2B() {
+      document.getElementById('story').innerHTML = `
+        <p>Unter dem roten Tischtuch klebt ein Zettel: <br><br>
+        <em>"Das Geheimnis steckt hinter dem Menü – Beeil dich! – Agent Macaroni"</em></p>
+        <button onclick="scene3B()">📋 Hinter das Menübrett schauen</button>
+      `;
+    }
 
-        <blockquote>
-            "Agent Luna, we have a Pasta Emergency! The secret pasta recipe from the famous restaurant <b>'Pasta Paradise'</b> is missing! Ravi O’Li, the sneaky noodle spy, wants to steal it and become famous himself. Only you can stop him!"
-        </blockquote>
+    function scene3A() {
+      document.getElementById('story').innerHTML = `
+        <p>Luna überrascht Ravi O’Li genau im richtigen Moment! Er lässt das Rezept fallen und rennt davon. Du hebst es auf – gerettet!</p>
+        <h3>🎉 Mission erfüllt! Du bist eine Pasta-Heldin! 🍝🥳</h3>
+      `;
+    }
 
-        <p>I'm ready to start the mission right away. The first clue says:</p>
+    function scene3B() {
+      document.getElementById('story').innerHTML = `
+        <p>Hinter dem Menü ist ein Pasta-Schalter versteckt! Du drückst ihn, und ein Geheimfach öffnet sich: das Rezept ist da! Chef Alfredo sagt: "Danke Luna, du bist großartig!"</p>
+        <h3>🎉 Mission erfüllt! Du bist eine Pasta-Heldin! 🍝🥳</h3>
+      `;
+    }
 
-        <blockquote>
-            "At 'Pasta Paradise' restaurant, look under the red tablecloth for your next step!"
-        </blockquote>
-
-        <h3>What should I do first?</h3>
-
-        <button onclick="scene2A()">👩‍🍳 Talk to the friendly waitress</button>
-        <button onclick="scene2B()">🔎 Secretly look under the tablecloth</button>
-    `;
-}
-
-function scene2A() {
-    document.getElementById('story').innerHTML = `
-        <p>You approach the friendly waitress. She smiles warmly and leans closer:<br>
-        "Oh Luna, I saw someone very suspicious sneaking around the kitchen door. He had a funny noodle-shaped moustache. Could it be Ravi O’Li? Be careful!"</p>
-
-        <button onclick="scene3A()">🥷 Sneak quietly into the kitchen</button>
-    `;
-}
-
-function scene2B() {
-    document.getElementById('story').innerHTML = `
-        <p>Carefully lifting the red tablecloth, you spot a tiny folded note taped beneath it. Unfolding the note, you read:<br>
-        "The secret is hidden behind the menu board. Hurry! - Agent Macaroni."</p>
-
-        <button onclick="scene3B()">📋 Check behind the menu board quickly</button>
-    `;
-}
-
-function scene3A() {
-    document.getElementById('story').innerHTML = `
-        <p>Luna sneaks into the kitchen and spots Ravi O’Li just as he's about to steal the secret recipe. She bravely jumps forward, surprising Ravi so much that he drops the recipe and escapes through the back door. Luna picks up the recipe—it's safe now!</p>
-        <h3>🎉 Mission accomplished! You are an official Pasta Hero! 🍝🥳</h3>
-    `;
-}
-
-function scene3B() {
-    document.getElementById('story').innerHTML = `
-        <p>Luna quickly solves the pasta-button puzzle behind the menu board. A hidden compartment opens, revealing the secret pasta recipe inside. Chef Alfredo arrives and smiles proudly:<br>
-        "I knew you'd solve it, Luna! Thank you for saving our special recipe!"</p>
-        <h3>🎉 Mission accomplished! You are an official Pasta Hero! 🍝🥳</h3>
-    `;
-}
-
-scene1();
-
-</script>
-
+    scene1();
+  </script>
 </body>
 </html>
