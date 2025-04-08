@@ -1,104 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <title>Lunas kulinarische Karte</title>
+  <meta charset="UTF-8" />
+  <title>Lunas kulinarische Karte von Mallorca</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
   <style>
-    html, body { margin: 0; padding: 0; }
-    #map { height: 100vh; width: 100vw; }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
     #sidebar {
       position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 35%;
+      left: 10px;
       z-index: 1000;
       text-align: center;
     }
-    #sidebar img {
+    #radio-image {
       width: 120px;
-      margin-bottom: 12px;
-      border-radius: 12px;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-    }
-    #music-button {
-      background-color: white;
-      border: 2px solid #333;
-      padding: 8px 12px;
-      font-size: 15px;
       cursor: pointer;
-      border-radius: 8px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
 <body>
 
-<div id="map"></div>
+  <!-- 🌴 Karte -->
+  <div id="map"></div>
 
-<!-- 🎨 Sidebar mit Bild + Button -->
-<div id="sidebar">
-  <img src="luna-radio.png" alt="Luna mit Radio" />
-  <button id="music-button">🎶 Musik abspielen</button>
-</div>
+  <!-- 📻 Sidebar mit Luna & Radio -->
+  <div id="sidebar">
+    <img src="luna-radio.png" alt="Luna mit Radio" id="radio-image" title="🎵 Musik starten / stoppen" />
+  </div>
 
-<audio id="bg-music" src="luna_compressed.mp3" loop></audio>
+  <!-- 🔊 Audio -->
+  <audio id="bg-music" src="luna_compressed.mp3" loop></audio>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-  const map = L.map('map', {
-    crs: L.CRS.Simple,
-    minZoom: -1,
-    maxZoom: 2
-  });
-
-  const bounds = [[0, 1536], [1024, 0]];
-  L.imageOverlay('map.png', bounds).addTo(map);
-  map.fitBounds(bounds);
-
-  function createIcon(img) {
-    return L.icon({
-      iconUrl: img,
-      iconSize: [60, 60],
-      iconAnchor: [30, 60],
-      popupAnchor: [0, -60]
+  <!-- 🗺️ Leaflet Map Script -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map', {
+      crs: L.CRS.Simple,
+      minZoom: -1,
+      maxZoom: 2
     });
-  }
 
-  L.marker([485, 438], { icon: createIcon('luna-car.png') })
-    .addTo(map)
-    .bindPopup("<b>Sumallia Restaurant</b><br><a href='https://maps.app.goo.gl/YRPxnLyd37Harvrx9' target='_blank'>Google Maps öffnen</a>");
+    const bounds = [[0, 1536], [1024, 0]]; // Originalgröße der Karte
+    L.imageOverlay('map.png', bounds).addTo(map);
+    map.fitBounds(bounds);
 
-  L.marker([772, 638], { icon: createIcon('luna-sitzend.png') })
-    .addTo(map)
-    .bindPopup("<b>HOTEL CORAZÓN</b><br><a href='https://maps.app.goo.gl/Y4pAaKAMWvk2j5v7' target='_blank'>Google Maps öffnen</a>");
-
-  L.marker([686, 686], { icon: createIcon('luna-wandern.png') })
-    .addTo(map)
-    .bindPopup("<b>Restaurant Nama</b><br><a href='https://maps.app.goo.gl/gNPdufrCXVewvJRY7' target='_blank'>Google Maps öffnen</a>");
-
-  L.marker([516, 546], { icon: createIcon('luna-liegend.png') })
-    .addTo(map)
-    .bindPopup("<b>Simply Son Braho</b><br><a href='https://maps.app.goo.gl/URizmtvp9kpJ3oJm8' target='_blank'>Google Maps öffnen</a>");
-
-  // 🎵 Musiksteuerung
-  const music = document.getElementById("bg-music");
-  const button = document.getElementById("music-button");
-  let isPlaying = false;
-
-  button.addEventListener("click", () => {
-    if (!isPlaying) {
-      music.play();
-      button.innerText = "🔇 Musik stoppen";
-    } else {
-      music.pause();
-      music.currentTime = 0;
-      button.innerText = "🎶 Musik abspielen";
+    // 🐶 Marker mit Luna-Bildern
+    function createIcon(img) {
+      return L.icon({
+        iconUrl: img,
+        iconSize: [60, 60],
+        iconAnchor: [30, 60],
+        popupAnchor: [0, -60]
+      });
     }
-    isPlaying = !isPlaying;
-  });
-</script>
 
+    L.marker([485, 438], { icon: createIcon('luna-car.png') })
+      .addTo(map)
+      .bindPopup("<b>Sumallia Restaurant</b><br><a href='https://maps.app.goo.gl/YRPxnLyd37Harvrx9' target='_blank'>Google Maps öffnen</a>");
+
+    L.marker([772, 638], { icon: createIcon('luna-sitzend.png') })
+      .addTo(map)
+      .bindPopup("<b>HOTEL CORAZÓN</b><br><a href='https://maps.app.goo.gl/Y4pAaKAMWvKzj5v7' target='_blank'>Google Maps öffnen</a>");
+
+    L.marker([686, 686], { icon: createIcon('luna-wandern.png') })
+      .addTo(map)
+      .bindPopup("<b>Restaurant Nama</b><br><a href='https://maps.app.goo.gl/gNPdufrCXVewvJRY7' target='_blank'>Google Maps öffnen</a>");
+
+    L.marker([516, 546], { icon: createIcon('luna-liegend.png') })
+      .addTo(map)
+      .bindPopup("<b>Simply Son Braho</b><br><a href='https://maps.app.goo.gl/URizmtvp9kpJ3oJm8' target='_blank'>Google Maps öffnen</a>");
+
+    // 🎵 Musiksteuerung über Bild
+    const music = document.getElementById("bg-music");
+    const radioImage = document.getElementById("radio-image");
+    let isPlaying = false;
+
+    radioImage.addEventListener("click", () => {
+      if (!isPlaying) {
+        music.play();
+        isPlaying = true;
+        radioImage.style.opacity = "0.7";
+      } else {
+        music.pause();
+        isPlaying = false;
+        radioImage.style.opacity = "1";
+      }
+    });
+  </script>
 </body>
 </html>
