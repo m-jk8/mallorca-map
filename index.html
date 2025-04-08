@@ -8,15 +8,25 @@
   <style>
     html, body { margin: 0; padding: 0; }
     #map { height: 100vh; width: 100vw; }
-    #music-button {
+    #sidebar {
       position: absolute;
-      top: 15px;
-      left: 15px;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 1000;
+      text-align: center;
+    }
+    #sidebar img {
+      width: 120px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+    #music-button {
       background-color: white;
       border: 2px solid #333;
       padding: 8px 12px;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
       border-radius: 8px;
       box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
@@ -26,8 +36,14 @@
 <body>
 
 <div id="map"></div>
-<button id="music-button">🎶 Musik abspielen</button>
-<audio id="bg-music" src="luna.mp3" loop></audio>
+
+<!-- 🎨 Sidebar mit Bild + Button -->
+<div id="sidebar">
+  <img src="luna-radio.png" alt="Luna mit Radio" />
+  <button id="music-button">🎶 Musik abspielen</button>
+</div>
+
+<audio id="bg-music" src="luna_compressed.mp3" loop></audio>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
