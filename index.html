@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Lunas kulinarische Karte</title>
+  <title>Luna's Culinary Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     html, body { margin: 0; padding: 0; height: 100%; }
     #map { height: 100%; width: 100%; }
-    /* Sidebar für Musiksteuerung – falls noch benötigt */
     #sidebar {
       position: absolute;
       top: 35%;
@@ -25,81 +24,81 @@
   </style>
 </head>
 <body>
-  <!-- Karte -->
-  <div id="map"></div>
-  
-  <!-- Falls du weiterhin die Musiksteuerung via Radio-Icon einsetzen möchtest -->
-  <div id="sidebar">
-    <img src="luna-radio.png" alt="Luna mit Radio" id="radio-image" title="🎵 Musik starten / stoppen" />
-  </div>
-  
-  <!-- Audio-Element -->
-  <audio id="bg-music" src="luna_compressed.mp3" loop></audio>
-  
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    // Karte initialisieren
-    const map = L.map('map', {
-      crs: L.CRS.Simple,
-      minZoom: -1,
-      maxZoom: 2
-    });
-    // Bild als Kartenhintergrund (Größe 1536 x 1024)
-    const bounds = [[0, 1536], [1024, 0]];
-    L.imageOverlay('map.png', bounds).addTo(map);
-    map.fitBounds(bounds);
 
-    // Funktion zum Erzeugen von Marker-Icons
-    function createIcon(img, size = [60, 60], anchor = [30, 60]) {
-      return L.icon({
-        iconUrl: img,
-        iconSize: size,
-        iconAnchor: anchor,
-        popupAnchor: [0, -anchor[1]]
-      });
+<!-- Map Container -->
+<div id="map"></div>
+
+<!-- Sidebar: Music control -->
+<div id="sidebar">
+  <img src="luna-radio.png" alt="Luna with Radio" id="radio-image" title="🎵 Tap to play music" />
+</div>
+
+<audio id="bg-music" src="luna_compressed.mp3" loop></audio>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -1,
+    maxZoom: 2
+  });
+
+  const bounds = [[0, 1536], [1024, 0]];
+  L.imageOverlay('map.png', bounds).addTo(map);
+  map.fitBounds(bounds);
+
+  function createIcon(img, size = [60, 60], anchor = [30, 60]) {
+    return L.icon({
+      iconUrl: img,
+      iconSize: size,
+      iconAnchor: anchor,
+      popupAnchor: [0, -anchor[1]]
+    });
+  }
+
+  // Marker: Luna car
+  L.marker([485, 438], { icon: createIcon('luna-car.png') })
+    .addTo(map)
+    .bindPopup("<b>Sumallia Restaurant</b><br><a href='https://maps.app.goo.gl/YRPxnLyd37Harvrx9' target='_blank'>Open in Google Maps</a>");
+
+  // Marker: HOTEL CORAZÓN
+  L.marker([772, 638], { icon: createIcon('luna-sitzend.png') })
+    .addTo(map)
+    .bindPopup("<b>HOTEL CORAZÓN</b><br><a href='https://maps.app.goo.gl/Y4pAaKAMANvk2j5v7' target='_blank'>Open in Google Maps</a>");
+
+  // Marker: Restaurant Nama
+  L.marker([686, 686], { icon: createIcon('luna-wandern.png') })
+    .addTo(map)
+    .bindPopup("<b>Restaurant Nama</b><br><a href='https://maps.app.goo.gl/gNpdUfrCXVewvJRy7' target='_blank'>Open in Google Maps</a>");
+
+  // Marker: Simply Son Braho
+  L.marker([516, 546], { icon: createIcon('luna-liegend.png') })
+    .addTo(map)
+    .bindPopup("<b>Simply Son Braho</b><br><a href='https://maps.app.goo.gl/URizmtvp9kpJ3oJm8' target='_blank'>Open in Google Maps</a>");
+
+  // Marker: Adventure 1
+  L.marker([512, 768], {
+    icon: createIcon('Adventure1-picture.jpg', [80, 80], [40, 40])
+  })
+  .addTo(map)
+  .bindPopup("<b>Luna's Adventure 1</b><br><a href='Adventure1.html' target='_self'>Click here to read more</a>");
+
+  // Music control
+  const music = document.getElementById("bg-music");
+  const radioImage = document.getElementById("radio-image");
+  let isPlaying = false;
+
+  radioImage.addEventListener("click", () => {
+    if (!isPlaying) {
+      music.play();
+      isPlaying = true;
+      radioImage.style.opacity = "0.7";
+    } else {
+      music.pause();
+      isPlaying = false;
+      radioImage.style.opacity = "1";
     }
-
-    // Marker für Restaurants / Luna-Bilder
-    L.marker([485, 438], { icon: createIcon('luna-car.png') })
-      .addTo(map)
-      .bindPopup("<b>Sumallia Restaurant</b><br><a href='https://maps.app.goo.gl/YRPxnLyd37Harvrx9' target='_blank'>Google Maps öffnen</a>");
-
-    L.marker([772, 638], { icon: createIcon('luna-sitzend.png') })
-      .addTo(map)
-      .bindPopup("<b>HOTEL CORAZÓN</b><br><a href='https://maps.app.goo.gl/Y4pAaKAMWvk2j5v7' target='_blank'>Google Maps öffnen</a>");
-
-    L.marker([686, 686], { icon: createIcon('luna-wandern.png') })
-      .addTo(map)
-      .bindPopup("<b>Restaurant Nama</b><br><a href='https://maps.app.goo.gl/gNPdufrCXVewvJRY7' target='_blank'>Google Maps öffnen</a>");
-
-    L.marker([516, 546], { icon: createIcon('luna-liegend.png') })
-      .addTo(map)
-      .bindPopup("<b>Simply Son Braho</b><br><a href='https://maps.app.goo.gl/URizmtvp9kpJ3oJm8' target='_blank'>Google Maps öffnen</a>");
-
-    // Neuer Marker: Adventure 1 – platziert in der Mitte der Insel
-    // Berechnet als Mittelpunkt: [512, 768] (ungefähr) – hier kannst du anpassen, falls nötig.
-    // Ich setze hier (512,768) als Ausgangspunkt, du kannst es aber gern auf deine gewünschten Koordinaten ändern.
-    L.marker([512, 768], { 
-        icon: createIcon('Adventure1-picture.jpg', [80, 80], [40, 40])
-      })
-      .addTo(map)
-      .bindPopup("<b>Luna's Adventure 1</b><br><a href='Adventure1.html' target='_self'>Klick hier zum Weiterlesen</a>");
-
-    // Musiksteuerung via Radio-Bild (falls du diese Funktion behalten möchtest)
-    const music = document.getElementById("bg-music");
-    const radioImage = document.getElementById("radio-image");
-    let isPlaying = false;
-    radioImage.addEventListener("click", () => {
-      if (!isPlaying) {
-        music.play();
-        isPlaying = true;
-        radioImage.style.opacity = "0.7";
-      } else {
-        music.pause();
-        isPlaying = false;
-        radioImage.style.opacity = "1";
-      }
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
